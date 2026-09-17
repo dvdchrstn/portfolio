@@ -834,19 +834,47 @@ h2::after {
 }
 
 .modal-images {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
     flex-shrink: 0;
-    width: 200px;
+    width: 280px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.modal-images::-webkit-scrollbar {
+    width: 4px;
+}
+
+.modal-images::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
 }
 
 .modal-img {
     width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 8px;
     border: 1px solid var(--border);
     cursor: zoom-in;
-    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-images-grid {
+    grid-template-columns: 1fr;
+    width: 220px;
+}
+
+.modal-images-grid .modal-img {
+    aspect-ratio: 4/3;
 }
 
 .img-overlay {
