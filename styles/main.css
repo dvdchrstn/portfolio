@@ -407,10 +407,10 @@ h2::after {
 
 .email-tooltip {
     position: absolute;
-    right: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-right: 12px;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    margin-top: 12px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -426,14 +426,14 @@ h2::after {
     z-index: 10;
 }
 
-.email-tooltip::after {
+.email-tooltip::before {
     content: '';
     position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     border: 6px solid transparent;
-    border-left-color: var(--border);
+    border-bottom-color: var(--border);
 }
 
 .email-pill-wrapper:hover .email-tooltip {
