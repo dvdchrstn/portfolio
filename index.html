@@ -8,7 +8,8 @@
     <meta property="og:title" content="David Christiano K | Web Developer">
     <meta property="og:description" content="I build fast, scalable, and easy-to-use websites and dashboards.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://David Christiano K-portfolio.example.com">
+    <meta property="og:url" content="https://dvdchrstn.github.io/portfolio/">
+    <link rel="canonical" href="https://dvdchrstn.github.io/portfolio/">
     <link rel="manifest" href="site.webmanifest">
     <link rel="icon" href="assets/images/pasfotonobackground.png" type="image/png">
     <link rel="stylesheet" href="styles/main.css">
@@ -18,12 +19,12 @@
       "@type": "Person",
       "name": "David Christiano K",
       "jobTitle": "Web Developer",
-      "image": "assets/images/pasfotoedited.jpg",
+      "image": "https://dvdchrstn.github.io/portfolio/assets/images/pasfotoedited.jpg",
         "description": "I build fast, scalable, and easy-to-use websites and dashboards.",
-      "url": "https://David Christiano K-portfolio.example.com",
+      "url": "https://dvdchrstn.github.io/portfolio/",
       "sameAs": [
-        "https://linkedin.com/in/David Christiano K",
-        "https://github.com/David Christiano K"
+        "https://www.linkedin.com/in/david-christiano/",
+        "https://github.com/dvdchrstn"
       ],
       "knowsAbout": ["Web Development", "JavaScript", "Firebase", "Node.js", "React", "Tailwind CSS"]
     }
@@ -152,7 +153,7 @@
                         </a>
                         <div class="email-tooltip">
                             <span class="email-tooltip-text">davidchristianok@gmail.com</span>
-                            <button class="email-copy-btn" onclick="copyEmail()">
+                            <button type="button" class="email-copy-btn" data-copy-email>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                                 Copy
                             </button>
@@ -423,6 +424,18 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Member of the Web Data Division</h3>
+                            <p class="timeline-date">General Elections Commission (KPU) of Universitas Sanata Dharma · March - October 2025</p>
+                            <ul>
+                                <li>Helped define features for the KPU website and drafted UI layouts in Figma</li>
+                                <li>Structured and implemented content and UI with semantic HTML5 + CSS3 (consistent, accessible)</li>
+                                <li>Analyzed election data and built visualizations (logical thinking, decision-making driven by data)</li>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -480,7 +493,7 @@
                 <div class="contact-links">
                     <div class="contact-item">
                         <span>davidchristianok@gmail.com</span>
-                        <button class="copy-email" aria-label="Copy email">Copy</button>
+                        <button type="button" class="copy-email" data-copy-email aria-label="Copy email">Copy</button>
                     </div>
                     <a href="https://www.linkedin.com/in/david-christiano/" target="_blank" class="contact-item">LinkedIn</a>
                     <!-- <a href="https://github.com" target="_blank" class="contact-item">GitHub</a> -->

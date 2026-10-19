@@ -155,25 +155,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Copy Email
-    const copyBtn = document.querySelector('.copy-email');
-    if (copyBtn) {
-        copyBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            navigator.clipboard.writeText('david@example.com').then(() => {
-                const text = copyBtn.innerText;
-                copyBtn.innerText = 'Copied!';
-                copyBtn.style.background = '#22c55e';
-                setTimeout(() => {
-                    copyBtn.innerText = text;
-                    copyBtn.style.background = '';
-                }, 2000);
-            }).catch(() => {
-                copyBtn.innerText = 'Failed';
-                setTimeout(() => copyBtn.innerText = 'Copy', 2000);
-            });
-        });
+    // Copy Email (hero tooltip + contact section)
+    const EMAIL_ADDRESS = 'davidchristianok@gmail.com';
+    const CHECK_ICON = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    `;
+
+    async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return;
+            } catch {
+                // Permission denied or clipboard unavailable: try the legacy fallback
+            }
+        }
+
+        // Fallback for older browsers / non-secure contexts
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        const copied = document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        if (!copied) throw new Error('Copy command failed');
     }
+
+    document.querySelectorAll('[data-copy-email]').forEach(copyBtn => {
+        const originalContent = copyBtn.innerHTML;
+        let resetTimer;
+
+        copyBtn.addEventListener('click', async () => {
+            clearTimeout(resetTimer);
+            copyBtn.classList.remove('copy-failed');
+
+            try {
+                await copyText(EMAIL_ADDRESS);
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = `${CHECK_ICON}Copied!`;
+            } catch {
+                copyBtn.classList.add('copy-failed');
+                copyBtn.textContent = 'Failed';
+            }
+
+            resetTimer = setTimeout(() => {
+                copyBtn.classList.remove('copied', 'copy-failed');
+                copyBtn.innerHTML = originalContent;
+            }, 2000);
+        });
+    });
 
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -186,47 +220,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// Copy Email Function
-function copyEmail() {
-    const email = 'davidchristianok@gmail.com';
-    const copyBtn = document.querySelector('.email-copy-btn');
-    
-    navigator.clipboard.writeText(email).then(() => {
-        copyBtn.classList.add('copied');
-        copyBtn.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Copied!
-        `;
-        
-        setTimeout(() => {
-            copyBtn.classList.remove('copied');
-            copyBtn.innerHTML = `
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy
-            `;
-        }, 2000);
-    }).catch(() => {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = email;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        copyBtn.classList.add('copied');
-        copyBtn.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Copied!
-        `;
-        
-        setTimeout(() => {
-            copyBtn.classList.remove('copied');
-            copyBtn.innerHTML = `
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy
-            `;
-        }, 2000);
-    });
-}

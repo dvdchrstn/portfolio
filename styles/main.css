@@ -436,7 +436,8 @@ h2::after {
     border-bottom-color: var(--border);
 }
 
-.email-pill-wrapper:hover .email-tooltip {
+.email-pill-wrapper:hover .email-tooltip,
+.email-pill-wrapper:focus-within .email-tooltip {
     opacity: 1;
     visibility: visible;
 }
@@ -1131,6 +1132,40 @@ h2::after {
     margin-top: 0.5rem;
 }
 
+@media (max-width: 768px) {
+    .modal {
+        padding: 0.75rem;
+    }
+
+    .modal-content {
+        padding: 1.25rem;
+        max-height: 90vh;
+    }
+
+    .modal-layout {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .modal-images,
+    .modal-images-grid {
+        width: 100%;
+        max-height: none;
+        padding-right: 0;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .modal-body h2 {
+        font-size: 1.25rem;
+        padding-right: 1.5rem;
+    }
+
+    .modal-close {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+}
+
 .cs-section, .cs-gallery, .cs-arch, .cs-comparison {
     margin-bottom: 2rem;
 }
@@ -1456,6 +1491,9 @@ h2::after {
 }
 
 .copy-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     background: var(--accent);
     color: white;
     border: none;
@@ -1464,11 +1502,20 @@ h2::after {
     font-size: 0.7rem;
     cursor: pointer;
     font-weight: 600;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background-color 0.2s;
 }
 
 .copy-email:hover {
     opacity: 0.9;
+}
+
+.copy-email.copied {
+    background: #22c55e;
+}
+
+.copy-email.copy-failed,
+.email-copy-btn.copy-failed {
+    background: #ef4444;
 }
 
 /* Footer */
