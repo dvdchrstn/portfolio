@@ -6,27 +6,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     root.setAttribute('data-theme', savedTheme);
 
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = root.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
 
     // Mobile Menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
-    mobileMenuBtn.addEventListener('click', () => {
-        const isOpen = mobileNav.style.display === 'flex';
-        mobileNav.style.display = isOpen ? 'none' : 'flex';
-    });
-
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileNav.style.display = 'none';
+    if (mobileMenuBtn && mobileNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileNav.style.display === 'flex';
+            mobileNav.style.display = isOpen ? 'none' : 'flex';
         });
-    });
+
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.style.display = 'none';
+            });
+        });
+    }
 
     // Project Filtering & Search
     const searchInput = document.getElementById('search-projects');
